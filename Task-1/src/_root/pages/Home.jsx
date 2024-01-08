@@ -39,7 +39,6 @@ const Home = () => {
                     ))
                 )
             }
-            <MobileCard />
         </div>
     )
 }
