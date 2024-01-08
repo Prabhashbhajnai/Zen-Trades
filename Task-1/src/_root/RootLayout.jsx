@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 const RootLayout = () => {
     return (
-        <div className='w-full md:flex p-10'>
+        <div className='w-full md:flex p-6'>
             <section className='flex flex-1 h-full'>
                 <Outlet />
             </section>
