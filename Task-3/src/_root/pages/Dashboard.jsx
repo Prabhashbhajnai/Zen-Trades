@@ -1,7 +1,7 @@
 import React from 'react'
-import CanvasJSReact from '@canvasjs/react-charts';
+// import CanvasJSReact from '@canvasjs/react-charts';
 
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // components
 import MetricCard from '../../components/MetricCard'
@@ -164,11 +164,11 @@ const Dashboard = () => {
                 <div className='flex gap-4'>
                     <div className='flex flex-col gap-3 w-1/2'>
                         <h1 className='font-bold text-xl'>Revenue BY Job Location</h1>
-                        <CanvasJSChart options={options1} />
+                        {/* <CanvasJSChart options={options1} /> */}
                     </div>
                     <div className='flex flex-col gap-3 w-1/2'>
                         <h1 className='font-bold text-xl'>Revenue BY Job Location</h1>
-                        <CanvasJSChart options={options2} />
+                        {/* <CanvasJSChart options={options2} /> */}
                     </div>
                 </div>
             </div>
