@@ -12,7 +12,7 @@ function App() {
           <Route path='/' element={<LoginPage />} />
 
         {/* private routes visible on after signing in*/}
-        <Route path='/dashboard' element={<Dashboard />} />
+        {/* <Route path='/dashboard' element={<Dashboard />} /> */}
       </Routes>
     </>
   )
