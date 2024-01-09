@@ -1,7 +1,7 @@
 import React from 'react'
-// import CanvasJSReact from '@canvasjs/react-charts';
+import CanvasJSReact from '@canvasjs/react-charts';
 
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // components
 import MetricCard from '../../components/MetricCard'
