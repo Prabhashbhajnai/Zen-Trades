@@ -1,10 +1,18 @@
+import { Routes, Route } from 'react-router-dom'
+
 // Pages
 import LoginPage from "./_auth/LoginPage";
 
 function App() {
   return (
     <>
-      <LoginPage />
+      <Routes>
+        {/* public routes visible for everyone */}
+          <Route path='/' element={<LoginPage />} />
+
+        {/* private routes visible on after signing in*/}
+        {/* <Route path='/dashboard' element={<Explore />} /> */}
+      </Routes>
     </>
   )
 }
