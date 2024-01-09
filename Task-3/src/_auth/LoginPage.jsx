@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // logo
 import logo from '../assets/logo.svg'
@@ -25,7 +25,7 @@ const LoginPage = () => {
     const handleSubmit = () => {
         const password = passwordRef.current.value
 
-        if (password === "SmartServTest@123"){
+        if (password === "SmartServTest@123") {
             navigate('/dashboard')
             return
         }
@@ -74,7 +74,9 @@ const LoginPage = () => {
                     Login
                 </button>
 
-                <p className='underline text-slate-400'>Forgot your password?</p>
+                <a href="mailto:support@smartserv.io?subject=Password%20Reset&body=Please%20reset%20my%20password%0D%0AMy%20email%3A%20">
+                    <p className='underline text-slate-400'>Forgot your password?</p>
+                </a>
             </div>
         </div>
     )
