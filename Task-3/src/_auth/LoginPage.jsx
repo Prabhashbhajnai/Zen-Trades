@@ -18,8 +18,6 @@ const LoginPage = () => {
 
     const validatePassword = (password) => {
         // Regular expression for password validation
-        if (password.length < 8)
-            return false
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*@)(?!.*[^A-Za-z0-9@]).{8,}$/;
         return passwordRegex.test(password);
     }
@@ -27,8 +25,10 @@ const LoginPage = () => {
     const handleSubmit = () => {
         const password = passwordRef.current.value
 
-        if (password === "SmartServTest@123")
+        if (password === "SmartServTest@123"){
             navigate('/dashboard')
+            return
+        }
 
         const username = usernameRef.current.value
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
             alert("Login Successful")
         else
             alert(
-                "Invalid Credentials\n\nPassword must contain:\n1. At least 8 characters\n2. At least 1 uppercase letter\n3. At least 1 digit\n4. No special characters allowed except '@'\n\nUsername must be a valid email address"
+                "Invalid Credentials\n\nPassword must contain:\n1. At least 1 uppercase letter\n3. At least 1 digit\n4. No special characters allowed except '@'\n\nUsername must be a valid email address"
             )
     }
 
