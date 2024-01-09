@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import DualListBox from 'react-dual-listbox';
 
 // styles
@@ -6,16 +7,45 @@ import './react-dual-listbox.css';
 
 const home = () => {
     const [options, setOptions] = useState([]);
+    const [selected, setSelected] = useState([]);
+    const [productArray, setProductArray] = useState([]);
 
-    var parsedData;
-    var keysOfProducts;
+    const navigate = useNavigate();
+
+    const handleCancel = (e) => {
+        console.log(e.target.value);
+        e.target.value = null;
+    }
+
+    const handleSubmit = async () => {
+        if (selected.length === 0) {
+            alert('Please select atleast one field to display');
+            return;
+        }
+
+        console.log(productArray);
+
+        navigate(
+            '/display',
+            {
+                state: {
+                    data: productArray,
+                    columns: selected,
+                }
+            }
+        )
+    }
 
     const handleChange = e => {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = event => {
-            parsedData = JSON.parse(event.target.result);
-            keysOfProducts = Object.keys(parsedData.products[12]);
+            const parsedData = JSON.parse(event.target.result);
+            // console.log(parsedData.products);
+            const keysOfProducts = Object.keys(parsedData.products[12]);
+            // console.log({ "keysOfProducts": keysOfProducts });
+
+            setProductArray(parsedData.products)
 
             const options = keysOfProducts.map(item => {
                 return { label: item.charAt(0).toUpperCase() + item.slice(1), value: item.toUpperCase() };
@@ -24,14 +54,6 @@ const home = () => {
             setOptions(options);
         };
     };
-
-    // console.log(options);
-
-    const [selected, setSelected] = useState([]);
-
-    useEffect(() => {
-        console.log(selected);
-    }, [selected])
 
     return (
         <div className='flex flex-col p-10 gap-6'>
@@ -113,10 +135,16 @@ const home = () => {
             </div>
 
             <div className='flex gap-2 justify-end items-end'>
-                <button className='bg-green-500	text-white px-6 py-2 rounded-lg'>
+                <button
+                    className='bg-green-500	text-white px-6 py-2 rounded-lg'
+                    onClick={handleSubmit}
+                >
                     Next
                 </button>
-                <button className='	text-red-500 px-6 py-2 rounded-lg'>
+                <button
+                    className='	text-red-500 px-6 py-2 rounded-lg'
+                    onClick={handleCancel}
+                >
                     Cancel
                 </button>
             </div>
