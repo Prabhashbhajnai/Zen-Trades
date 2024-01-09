@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 
 // Pages
 import LoginPage from "./_auth/LoginPage";
-import Dashboard from "./_root/pages/dashboard"
+import Dashboard from "./_root/pages/Dashboard"
 
 function App() {
   return (
