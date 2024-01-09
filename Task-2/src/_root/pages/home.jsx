@@ -1,16 +1,37 @@
-import React, { useState } from 'react'
-import Duallist from 'react-duallist';
+import React, { useEffect, useState } from 'react'
+import DualListBox from 'react-dual-listbox';
 
 // styles
-import './react_duallist.css'
+import './react-dual-listbox.css';
 
 const home = () => {
-    const available = [
-        { label: 'Alabama', value: 'AL' },
-        { label: 'California', value: 'CA' },
-    ];
+    const [options, setOptions] = useState([]);
+
+    var parsedData;
+    var keysOfProducts;
+
+    const handleChange = e => {
+        const fileReader = new FileReader();
+        fileReader.readAsText(e.target.files[0], "UTF-8");
+        fileReader.onload = event => {
+            parsedData = JSON.parse(event.target.result);
+            keysOfProducts = Object.keys(parsedData.products[12]);
+
+            const options = keysOfProducts.map(item => {
+                return { label: item.charAt(0).toUpperCase() + item.slice(1), value: item.toUpperCase() };
+            });
+
+            setOptions(options);
+        };
+    };
+
+    // console.log(options);
 
     const [selected, setSelected] = useState([]);
+
+    useEffect(() => {
+        console.log(selected);
+    }, [selected])
 
     return (
         <div className='flex flex-col p-10 gap-6'>
@@ -23,7 +44,7 @@ const home = () => {
                         <h3>Step-1: </h3>
                         <div className='gap-3'>
                             <h3>Select File</h3>
-                            <input type="file" id="myfile" name="myfile" />
+                            <input type="file" id="myfile" name="myfile" onChange={handleChange} />
                             <h2 className='mt-10'>Supported File Type(s): .JSON</h2>
                         </div>
                     </div>
@@ -43,8 +64,8 @@ const home = () => {
                             </div>
                             <div className='flex flex-col w-1/2'>
                                 <select name="fileType" id="fileType">
-                                    <option value="csv">csv</option>
                                     <option value="json">json</option>
+                                    <option value="csv">csv</option>
                                 </select>
                                 <select name="encodeing" id="cars">
                                     <option value="UTF-8">UTF-8</option>
@@ -66,22 +87,38 @@ const home = () => {
                     <div className='flex flex-col w-1/2 gap-2'>
                         <h3>Display Handler</h3>
                         <h3>Select the fields to be displayed</h3>
-                        {/* <Duallist
-                            available={available}
-                            // selected={true}
-                            // onSelect={true}
-                            // onMove={this.onMove}
-                            sortable={false}
-                            searchable={false}
-                            className='w-full'
-                        /> */}
-                        <Duallist
-                            available={available}
+                        <DualListBox
+                            options={options}
                             selected={selected}
-                            // onMove={this.onMove}
+                            onChange={(newValue) => setSelected(newValue)}
+                            icons={{
+                                moveLeft: <span className="fa fa-chevron-left" />,
+                                moveAllLeft: [
+                                    <span key={0} className="fa fa-chevron-left" />,
+                                    <span key={1} className="fa fa-chevron-left" />,
+                                ],
+                                moveRight: <span className="fa fa-chevron-right" />,
+                                moveAllRight: [
+                                    <span key={0} className="fa fa-chevron-right" />,
+                                    <span key={1} className="fa fa-chevron-right" />,
+                                ],
+                                moveDown: <span className="fa fa-chevron-down" />,
+                                moveUp: <span className="fa fa-chevron-up" />,
+                                moveTop: <span className="fa fa-double-angle-up" />,
+                                moveBottom: <span className="fa fa-double-angle-down" />,
+                            }}
                         />
                     </div>
                 </div>
+            </div>
+
+            <div className='flex gap-2 justify-end items-end'>
+                <button className='bg-green-500	text-white px-6 py-2 rounded-lg'>
+                    Next
+                </button>
+                <button className='	text-red-500 px-6 py-2 rounded-lg'>
+                    Cancel
+                </button>
             </div>
         </div >
     )
