@@ -1,8 +1,5 @@
 import React from 'react'
-import CanvasJSReact from '@canvasjs/react-charts';
-
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
+import { Chart } from "react-google-charts";
 // components
 import MetricCard from '../../components/MetricCard'
 
@@ -47,104 +44,101 @@ const Dashboard = () => {
     ]
 
     const graphMetrics1 = [
-        {
-            label: "Everett",
-            y: 80000
-        },
-        {
-            label: "Seattle",
-            y: 60000
-        },
-        {
-            label: "Lynnwood",
-            y: 44000
-        },
-        {
-            label: "Bothell",
-            y: 43000
-        },
-        {
-            label: "Mukilteo",
-            y: 41000
-        },
-        {
-            label: "Edmonds",
-            y: 34000
-        },
+        ["", ""],
+        [
+            "Everett",
+            80000
+        ],
+        [
+            "Seattle",
+            60000
+        ],
+        [
+            "Lynnwood",
+            44000
+        ],
+        [
+            "Bothell",
+            43000
+        ],
+        [
+            "Mukilteo",
+            41000
+        ],
+        [
+            "Edmonds",
+            34000
+        ],
 
     ]
 
     const graphMetrics2 = [
-        {
-            label: "Service Plumbing",
-            y: 190000
-        },
-        {
-            label: "Bid Work HVAC",
-            y: 130000
-        },
-        {
-            label: "Service HVAC",
-            y: 79000
-        },
-        {
-            label: "Bid Work Plumbing",
-            y: 78000
-        },
-        {
-            label: "HWT Replacement",
-            y: 44000
-        },
-        {
-            label: "Maintenance",
-            y: 42000
-        },
-        {
-            label: "Material Sale",
-            y: 500
-        },
+        ["", ""],
+        [
+            "Service Plumbing",
+            190000
+        ],
+        [
+            "Bid Work HVAC",
+            130000
+        ],
+        [
+            "Service HVAC",
+            79000
+        ],
+        [
+            "Bid Work Plumbing",
+            78000
+        ],
+        [
+            "HWT Replacement",
+            44000
+        ],
+        [
+            "Maintenance",
+            42000
+        ],
+        [
+            "Material Sale",
+            500
+        ],
 
     ]
 
     const options1 = {
-        animationEnabled: true,
-        theme: "light2",
-        axisX: {
-            labelAngle: 0,
-            reversed: true,
-        },
-        axisY: {
+        chartArea: { width: "50%" },
+        hAxis: {
             title: "Revenue for November 2019",
-            labelAngle: 50,
-            includeZero: true,
+            minValue: 0,
+            slantedText: true,
+            slantedTextAngle: 40
         },
-        dataPointWidth: 30,
-        data: [{
-            type: "bar",
-            color: '#34d399',
-            dataPoints: graphMetrics1
-        }]
-    }
+        colors: ['#34d399'],
+        legend: "none",
+        animation: {
+            startup: true,
+            easing: "out",
+            duration: 1000,
+        },
+
+    };
 
     const options2 = {
-        animationEnabled: true,
-        theme: "light2",
-        axisX: {
-            labelAngle: 0,
-            reversed: true,
-        },
-        axisY: {
+        chartArea: { width: "50%" },
+        hAxis: {
             title: "Revenue for November 2019",
-            labelAngle: 50,
-            includeZero: true,
+            minValue: 0,
+            slantedText: true,
+            slantedTextAngle: 40
         },
-        dataPointWidth: 30,
-        data: [{
-            type: "bar",
-            color: '#34d399',
-            dataPoints: graphMetrics2
-        }]
-    }
+        colors: ['#34d399'],
+        legend: "none",
+        animation: {
+            startup: true,
+            easing: "out",
+            duration: 1000,
+        },
+    };
 
     return (
         <div className='flex flex-col w-screen h-screen bg-slate-200 px-10 py-6 gap-10'>
@@ -164,11 +158,23 @@ const Dashboard = () => {
                 <div className='flex gap-4'>
                     <div className='flex flex-col gap-3 w-1/2'>
                         <h1 className='font-bold text-xl'>Revenue BY Job Location</h1>
-                        {/* <CanvasJSChart options={options1} /> */}
+                        <Chart
+                            chartType="BarChart"
+                            width="100%"
+                            height="400px"
+                            data={graphMetrics1}
+                            options={options1}
+                        />
                     </div>
                     <div className='flex flex-col gap-3 w-1/2'>
                         <h1 className='font-bold text-xl'>Revenue BY Job Location</h1>
-                        {/* <CanvasJSChart options={options2} /> */}
+                        <Chart
+                            chartType="BarChart"
+                            width="100%"
+                            height="400px"
+                            data={graphMetrics2}
+                            options={options2}
+                        />
                     </div>
                 </div>
             </div>
